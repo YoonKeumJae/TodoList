@@ -2,7 +2,7 @@ import { useState } from "react";
 import { patchTodos, deleteTodos } from "api";
 import "../styles/components/Todo.scss";
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, update }) => {
   const [done, setDone] = useState(todo.done);
 
   const onStatusEdit = (e) => {
@@ -13,13 +13,13 @@ const Todo = ({ todo }) => {
       done: !done,
     });
     setDone(!done);
+    update();
   };
 
   const onDelete = (e) => {
     e.preventDefault();
     deleteTodos(todo.id);
-    console.log("deleted");
-    console.log(todo.id);
+    update();
   };
 
   return (
@@ -30,7 +30,7 @@ const Todo = ({ todo }) => {
         ) : (
           <span onClick={onStatusEdit}>❎</span>
         )}
-        <span className="task">TASK: {todo.text}</span>
+        <span className="task">{todo.text}</span>
         <button type="button" onClick={onDelete} className="btn__delete">
           Delete
         </button>

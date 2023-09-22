@@ -7,22 +7,23 @@ const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const res = await getTodos();
-        setTodos(res);
-      } catch (e) {
-        console.error(e);
-      }
+  const updateData = async () => {
+    try {
+      const res = await getTodos();
+      setTodos(res);
+    } catch (e) {
+      console.error(e);
     }
-    getData();
+  };
+
+  useEffect(() => {
+    updateData();
   }, []);
 
   const viewForm = () => {
     setFormVisible(!formVisible);
   };
-  console.log(Object.values(todos));
+
   return (
     <div className="wrapper">
       <h1 className="title">Todos</h1>
@@ -34,7 +35,7 @@ const Todos = () => {
         <div className="todoList">
           {Object.values(todos).map((todo) => (
             <div>
-              <Todo todo={todo} />
+              <Todo todo={todo} update={updateData} />
             </div>
           ))}
         </div>

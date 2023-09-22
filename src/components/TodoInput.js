@@ -13,12 +13,18 @@ const TodoInput = () => {
   const newId = uuidv4();
 
   const onClickSubmit = (e) => {
+    if (todo === "") {
+      alert("공백은 입력 불가입니다");
+      return;
+    }
     e.preventDefault();
     putTodos({
       id: newId,
-      text: todo,
+      text: todo.trim(),
       done: false,
     });
+    document.querySelector(".input__text").value = "";
+    // window.location.reload();
   };
 
   return (
