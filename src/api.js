@@ -7,8 +7,11 @@ const getTodos = async () => {
 };
 
 const putTodos = async (todo) => {
-  const response = await fetch(`${api_addr}todos.json`, {
-    method: "POST",
+  const response = await fetch(`${api_addr}todos/${todo.id}.json`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(todo),
   });
   if (response.ok) {
@@ -18,9 +21,10 @@ const putTodos = async (todo) => {
   }
 };
 
-const fetchTodos = async (id) => {
-  const response = await fetch(`${api_addr}todos/${id}.json`, {
-    method: "PUT",
+const patchTodos = async (todo) => {
+  const response = await fetch(`${api_addr}todos/${todo.id}.json`, {
+    method: "PATCH",
+    body: JSON.stringify({done: todo.done})
   });
   if (response.ok) {
     return response.json();
@@ -32,6 +36,9 @@ const fetchTodos = async (id) => {
 const deleteTodos = async (id) => {
   const response = await fetch(`${api_addr}todos/${id}.json`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   if (response.ok) {
     return response.json();
@@ -40,4 +47,4 @@ const deleteTodos = async (id) => {
   }
 };
 
-export { getTodos, putTodos, fetchTodos, deleteTodos };
+export { getTodos, putTodos, patchTodos, deleteTodos };

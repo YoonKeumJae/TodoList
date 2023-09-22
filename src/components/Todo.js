@@ -1,35 +1,43 @@
 import { useState } from "react";
+import { patchTodos, deleteTodos } from "api";
 
 const Todo = ({ todo }) => {
-  const [todoText, setTodoText] = useState(todo.text);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(todo.done);
 
-  const editTodo = (e) => {
+  const onStatusEdit = (e) => {
     e.preventDefault();
-    setTodoText(e.target.value);
-  };
-
-  const changeTodoStatus = (e) => {
-    e.preventDefault();
+    patchTodos({
+      id: todo.id,
+      text: todo.text,
+      done: !done,
+    });
     setDone(!done);
   };
 
+  const onDelete = (e) => {
+    e.preventDefault();
+    deleteTodos(todo.id);
+    console.log("deleted");
+    console.log(todo.id);
+  };
+
   return (
-    <li>
-      <li className="todo">
-        <span>{todo.id}</span>
-        <span>{todoText}</span>
+    <div>
+      <div className="todo">
+        <span key={todo.id}>ID: {todo.id}</span>
+        <br />
+        <span>TASK: {todo.text}</span>
+        <br />
         {done ? (
-          <span onClick={changeTodoStatus}>✅</span>
+          <span onClick={onStatusEdit}>✅</span>
         ) : (
-          <span onClick={changeTodoStatus}>❎</span>
+          <span onClick={onStatusEdit}>❎</span>
         )}
-        <button type="button">Delete</button>
-        <button type="button" onClick={editTodo}>
-          Edit
+        <button type="button" onClick={onDelete}>
+          Delete
         </button>
-      </li>
-    </li>
+      </div>
+    </div>
   );
 };
 
