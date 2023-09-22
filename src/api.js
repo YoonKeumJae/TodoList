@@ -1,4 +1,4 @@
-const api_addr = "https://todo1-93739-default-rtdb.firebaseio.com/";
+import api_addr from "apiKey";
 
 const getTodos = async () => {
   const response = await fetch(`${api_addr}todos.json`);

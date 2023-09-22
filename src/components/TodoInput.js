@@ -24,7 +24,6 @@ const TodoInput = () => {
       done: false,
     });
     document.querySelector(".input__text").value = "";
-    // window.location.reload();
   };
 
   return (
