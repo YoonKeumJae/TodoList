@@ -8,7 +8,13 @@ const Home = () => {
 
   const handleTitle = (e) => {
     e.preventDefault();
-    setTitle(inputValue);
+    if (inputValue.trim() === "") {
+      alert("공백은 입력 불가입니다");
+      document.querySelector(".input__title").value = "";
+      return;
+    }
+    setTitle(inputValue.trim());
+    document.querySelector(".input__title").value = "";
   };
 
   const handleInput = (e) => {
