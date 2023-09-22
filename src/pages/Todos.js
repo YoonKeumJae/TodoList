@@ -1,6 +1,7 @@
 import { getTodos } from "../api";
 import { useState, useEffect } from "react";
 import { Todo, TodoInput } from "../components";
+import "../styles/pages/Todos.scss";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
@@ -23,14 +24,13 @@ const Todos = () => {
   };
   console.log(Object.values(todos));
   return (
-    <div>
-      <h1>Todos</h1>
-      <div>
-        <button type="button" onClick={viewForm}>
-          ➕
+    <div className="wrapper">
+      <h1 className="title">Todos</h1>
+      <div className="form">
+        <button type="button" onClick={viewForm} className="btn__newTask">
+          ➕ Click to add a new task!
         </button>
         {formVisible ? <TodoInput /> : null}
-        <hr />
         <div className="todoList">
           {Object.values(todos).map((todo) => (
             <div>

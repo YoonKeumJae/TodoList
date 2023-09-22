@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { patchTodos, deleteTodos } from "api";
+import "../styles/components/Todo.scss";
 
 const Todo = ({ todo }) => {
   const [done, setDone] = useState(todo.done);
@@ -22,18 +23,15 @@ const Todo = ({ todo }) => {
   };
 
   return (
-    <div>
+    <div className="wrapper__todo">
       <div className="todo">
-        <span key={todo.id}>ID: {todo.id}</span>
-        <br />
-        <span>TASK: {todo.text}</span>
-        <br />
         {done ? (
           <span onClick={onStatusEdit}>✅</span>
         ) : (
           <span onClick={onStatusEdit}>❎</span>
         )}
-        <button type="button" onClick={onDelete}>
+        <span className="task">TASK: {todo.text}</span>
+        <button type="button" onClick={onDelete} className="btn__delete">
           Delete
         </button>
       </div>

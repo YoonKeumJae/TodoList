@@ -1,6 +1,7 @@
 import { putTodos } from "api";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import "../styles/components/TodoInput.scss";
 
 const TodoInput = () => {
   const [todo, setTodo] = useState("");
@@ -21,18 +22,17 @@ const TodoInput = () => {
   };
 
   return (
-    <div>
-      <form>
-        <input
-          type="text"
-          placeholder="I have to do..."
-          onChange={todoChangeHandler}
-        ></input>
-        <button type="submit" onClick={onClickSubmit}>
-          OK
-        </button>
-      </form>
-    </div>
+    <form className="form">
+      <input
+        type="text"
+        placeholder="I have to do..."
+        onChange={todoChangeHandler}
+        className="input__text"
+      ></input>
+      <button type="submit" onClick={onClickSubmit}>
+        OK
+      </button>
+    </form>
   );
 };
 export default TodoInput;

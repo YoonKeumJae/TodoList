@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/pages/Home.scss";
 
 const Home = () => {
   const [title, setTitle] = useState("My TodoList");
@@ -22,16 +23,21 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <div>
-        <form>
-          <input type="text" placeholder="Input title" onChange={handleInput} />
-          <button type="submit" onClick={handleTitle}>
+    <div className="wrapper">
+      <h1 className="title">{title}</h1>
+      <div className="body__wrapper">
+        <form className="inputForm">
+          <input
+            type="text"
+            placeholder="Input title"
+            onChange={handleInput}
+            className="input__title"
+          />
+          <button type="submit" onClick={handleTitle} className="btn__title">
             OK
           </button>
         </form>
-        <button type="button" onClick={moveToList}>
+        <button type="button" onClick={moveToList} className="btn__move">
           Move to List
         </button>
       </div>
