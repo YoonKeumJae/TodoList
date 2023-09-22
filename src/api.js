@@ -17,6 +17,7 @@ const putTodos = async (todo) => {
   if (response.ok) {
     return response.json();
   } else {
+    console.log("error");
     throw new Error("Error");
   }
 };
@@ -24,7 +25,7 @@ const putTodos = async (todo) => {
 const patchTodos = async (todo) => {
   const response = await fetch(`${api_addr}todos/${todo.id}.json`, {
     method: "PATCH",
-    body: JSON.stringify({done: todo.done})
+    body: JSON.stringify({ done: todo.done }),
   });
   if (response.ok) {
     return response.json();

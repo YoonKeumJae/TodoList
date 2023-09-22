@@ -1,22 +1,29 @@
 import { getTodos } from "../api";
 import { useState, useEffect } from "react";
 import { Todo, TodoInput } from "../components";
+import { v4 as uuidv4 } from "uuid";
 import "../styles/pages/Todos.scss";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
 
-  const updateData = async () => {
-    try {
-      const res = await getTodos();
-      setTodos(res);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
+    const updateData = async () => {
+      try {
+        const res = await getTodos();
+        if (res === null) {
+          const newId = uuidv4();
+          return [
+            ...todos,
+            { id: newId, text: "아직 아무것도 없어요!", done: false },
+          ];
+        }
+        setTodos(res);
+      } catch (e) {
+        console.error(e);
+      }
+    };
     updateData();
   }, []);
 
@@ -34,8 +41,8 @@ const Todos = () => {
         {formVisible ? <TodoInput /> : null}
         <div className="todoList">
           {Object.values(todos).map((todo) => (
-            <div>
-              <Todo todo={todo} update={updateData} />
+            <div key={todo.id}>
+              <Todo todo={todo} />
             </div>
           ))}
         </div>

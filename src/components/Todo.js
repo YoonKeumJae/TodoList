@@ -2,7 +2,7 @@ import { useState } from "react";
 import { patchTodos, deleteTodos } from "api";
 import "../styles/components/Todo.scss";
 
-const Todo = ({ todo, update }) => {
+const Todo = ({ todo }) => {
   const [done, setDone] = useState(todo.done);
 
   const onStatusEdit = (e) => {
@@ -13,13 +13,11 @@ const Todo = ({ todo, update }) => {
       done: !done,
     });
     setDone(!done);
-    update();
   };
 
   const onDelete = (e) => {
     e.preventDefault();
     deleteTodos(todo.id);
-    update();
   };
 
   return (
