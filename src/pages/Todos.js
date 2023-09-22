@@ -26,7 +26,7 @@ const Todos = () => {
       }
     };
     updateData();
-  }, []);
+  }, [todos]);
 
   const viewForm = () => {
     setFormVisible(!formVisible);
