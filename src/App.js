@@ -1,7 +1,21 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Home, Todos } from "./pages";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/todos",
+    element: <Todos />,
+  },
+]);
+
 function App() {
   return (
     <div>
-      <h1>React App</h1>
+      <RouterProvider router={router} />
     </div>
   );
 }
